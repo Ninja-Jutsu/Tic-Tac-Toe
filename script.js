@@ -14,8 +14,9 @@ function TicTacToe(fName, sName){
   }
   let actualPlayer = player1;
 
+
 //+ Create the GameBoard:
-const GameBoard = function makeBoard(){
+  const GameBoard = function (){
     let z = 4
     let w = 1
     for(y = 0; y < 3; y++){
@@ -27,8 +28,11 @@ const GameBoard = function makeBoard(){
     w += 3
     }
   }
+  GameBoard()
+
 //+ Play a move:
   const placeToken = function (position) {
+    console.log(board)
       for(i = 0; i < board.length ; i++){
       let tokenPosition = board[i].findIndex(cell => cell === position)
         if (tokenPosition === -1){
@@ -37,10 +41,14 @@ const GameBoard = function makeBoard(){
         else {
           board[i][tokenPosition] = actualPlayer.token
           switchPlayer()
+          console.log(actualPlayer)
         }
       }
-      console.log(board)
   }
+
+  placeToken("5")
+  placeToken("7")
+
 
 //+ Check THe winner:
   const checkWinner = function (){
@@ -103,9 +111,10 @@ const GameBoard = function makeBoard(){
   }
 
   function switchPlayer(){
-    if (actualPlayer === "player1")
-    actualPlayer = "player2"
-  }
+    if (actualPlayer === player2)
+    actualPlayer = player1
+    else{actualPlayer = player2}
+    }
 
   function changeCellStyle(){
     for (i = 1; i < 10; i++){
@@ -114,16 +123,12 @@ const GameBoard = function makeBoard(){
     }
   }
 
-  function changeCellContent(){
-    
-  }
 
-
-  
   return {player1 , player2 , resetBoard , checkWinner, placeToken}
 }
 
-// TicTacToe().placeToken(5)
 
+
+TicTacToe("Is", "Van")
 
 
