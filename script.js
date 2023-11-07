@@ -32,7 +32,6 @@ function TicTacToe(fName, sName){
 
 //+ Play a move:
   const placeToken = function (position) {
-    console.log(board)
       for(i = 0; i < board.length ; i++){
       let tokenPosition = board[i].findIndex(cell => cell === position)
         if (tokenPosition === -1){
@@ -41,14 +40,9 @@ function TicTacToe(fName, sName){
         else {
           board[i][tokenPosition] = actualPlayer.token
           switchPlayer()
-          console.log(actualPlayer)
         }
       }
   }
-
-  placeToken("5")
-  placeToken("7")
-
 
 //+ Check THe winner:
   const checkWinner = function (){
@@ -64,7 +58,7 @@ function TicTacToe(fName, sName){
       return console.log(`${player2.name} Wins`)
     }
 
-    //* Loop diagonally from top/right:
+  //* Loop diagonally from top/right:
     for (i = 2, j = 0; i >= 0 && j < 3; i--, j++){
       line += board[i][j]
     } 
@@ -75,7 +69,7 @@ function TicTacToe(fName, sName){
       return console.log(`${player2.name} Wins`)
     }
 
-    //* Loop through columns
+  //* Loop through columns
     for (i = 0; i < 3 ; i++){
       const columns = board.map(array => array[i]);
       line = columns.toString();
@@ -87,7 +81,7 @@ function TicTacToe(fName, sName){
       }
     }
 
-    //* Loop through rows:
+  //* Loop through rows:
     for (i = 0; i < 3 ; i ++){ 
       line = board[i].toString();
       if (line === "X,X,X"){
@@ -100,12 +94,13 @@ function TicTacToe(fName, sName){
     line = '';
   }
 
+  checkWinner()
   //+ Reset the GameBoard:
   const resetBoard = function(){
     board = [
-      [1,2,3],
-      [4,5,6],
-      [7,8,9]
+      [],
+      [],
+      []
     ]
     return console.log(board)
   }
@@ -130,5 +125,3 @@ function TicTacToe(fName, sName){
 
 
 TicTacToe("Is", "Van")
-
-
