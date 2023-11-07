@@ -44,7 +44,19 @@ footer{
 #game-board,
 footer {
     display: grid;
-    justify-items: center;
-    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
+#game-board .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    border: 2px solid gold;
+}
+
+#game-board {
+    border: 2px solid red;
+}

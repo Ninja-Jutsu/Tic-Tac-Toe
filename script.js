@@ -4,30 +4,32 @@ function TicTacToe(fName, sName){
       [4,5,6],
       [7,8,9]
     ]
-
   let player1 = {
     name : fName,
     token : "X"
   }
-
   let player2 = {
     name : sName,
     token : "O"
   }
+  let actualPlayer = player1;
 
-  const placeToken = function (player, position) {
+//+ Play a move:
+  const placeToken = function (position) {
       for(i = 0; i < board.length ; i++){
       let tokenPosition = board[i].findIndex(cell => cell === position)
         if (tokenPosition === -1){
           continue
         }
         else {
-          board[i][tokenPosition] = player.token
+          board[i][tokenPosition] = actualPlayer.token
+          switchPlayer()
         }
       }
       console.log(board)
   }
 
+//+ Check THe winner:
   const checkWinner = function (){
     let line = ''
     //! Loop diagonally from top/left:
@@ -41,7 +43,7 @@ function TicTacToe(fName, sName){
       return console.log(`${player2.name} Wins`)
     }
 
-    //! Loop diagonally from top/right:
+    //* Loop diagonally from top/right:
     for (i = 2, j = 0; i >= 0 && j < 3; i--, j++){
       line += board[i][j]
     } 
@@ -52,7 +54,7 @@ function TicTacToe(fName, sName){
       return console.log(`${player2.name} Wins`)
     }
 
-    //! Loop through columns
+    //* Loop through columns
     for (i = 0; i < 3 ; i++){
       const columns = board.map(array => array[i]);
       line = columns.toString();
@@ -64,7 +66,7 @@ function TicTacToe(fName, sName){
       }
     }
 
-    //! Loop through rows:
+    //* Loop through rows:
     for (i = 0; i < 3 ; i ++){ 
       line = board[i].toString();
       if (line === "X,X,X"){
@@ -77,7 +79,7 @@ function TicTacToe(fName, sName){
     line = '';
   }
 
-  //! Reset the GameBoard:
+  //+ Reset the GameBoard:
   const resetBoard = function(){
     board = [
       [1,2,3],
@@ -86,11 +88,42 @@ function TicTacToe(fName, sName){
     ]
     return console.log(board)
   }
+
+  function switchPlayer(){
+    if (actualPlayer === "player1")
+    actualPlayer = "player2"
+  }
   return {player1 , player2 , resetBoard , checkWinner, placeToken}
 }
 
+// TicTacToe().placeToken(5)
 
-player = TicTacToe("Ismail", "Vanessa")
-player.checkWinner()
+function changeCellStyle(){
+  for (i = 1; i < 10; i++){
+    let cell = document.querySelector(`.cell-${i}`)
+    cell.addEventListener("click", () => cell.style.backgroundColor ="red")
+  }
+}
 
+function changeCellContent(){
+  let board = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+  ]
 
+  let player1 = {
+    name : fName,
+    token : "X"
+  }
+
+  let player2 = {
+    name : sName,
+    token : "O"
+  }
+  for (i = 1; i < 10; i++){
+    let cell = document.querySelector(`.cell-${i}`)
+    cell.addEventListener("click", () => {
+    })
+  }
+}
