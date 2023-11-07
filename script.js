@@ -28,32 +28,9 @@ function placeToken(player, position) {
 
 function winGame(){
   let text = ''
-  for (i = 0; i < board.length ; i++){
-      for (j = 0; j < board.length; j++){
-        text = text + board[i][j]
-      }
-      if (text === "XXX"){
-        return console.log(`${player1.name} Wins`)
-      }
-      else if (text === "OOO"){
-        return console.log(`${player2.name} Wins`)
-      }
-    text = '';
-  }
 
-  for (i = 0 ; i < 3 ; i++){
-    for (j = 0; j < 3 ; j++){
-      text = text + board[j][i]
-    }
-    if (text === "XXX"){
-      return console.log(`${player1.name} Wins`)
-    }
-    else if (text === "OOO"){
-      return console.log(`${player2.name} Wins`)
-    }
-    text = '';
-  }
 
+  //! Loop diagonally:
   for (i = 0; i < 3; i++){
     text = text + board[i][i]
   }
@@ -75,9 +52,32 @@ function winGame(){
     return console.log(`${player2.name} Wins`)
   }
 
+  //! Loop through columns
+  for (i = 0; i < 3 ; i ++){
+    const columns = board.map(array => array[i]);
+    text = columns.toString();
+    if (text === "X,X,X"){
+      return console.log(`${player1.name} Wins`)
+    }
+    else if (text === "O,O,O"){
+      return console.log(`${player2.name} Wins`)
+    }
+  }
+
+  //! Loop through rows:
+  for (i = 0; i < 3 ; i ++){ 
+    const rows = board[i].map(array => array);
+    text = rows.toString();
+    if (text === "X,X,X"){
+      return console.log(`${player1.name} Wins`)
+    }
+    else if (text === "O,O,O"){
+      return console.log(`${player2.name} Wins`)
+    }
+  }
+
   text = '';
 }
-console.log(board)
 
 
 //! Reset the GameBoard:
