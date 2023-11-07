@@ -1,0 +1,50 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: pink;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.header {
+    grid-column: 1 / 7;
+    background-color: aqua;
+}
+
+.side-left {
+    grid-row: 2 / 6;
+    background-color: aliceblue;
+
+}
+
+.side-right {
+    grid-column: 6 / 7;
+    grid-row: 2 / 6;
+    background-color: lightgoldenrodyellow;
+}
+
+footer{
+    grid-column: 1 / 7;
+    grid-row: 6 / 7;
+    background-color: lightsalmon;
+}
+
+#game-board {
+    grid-row: 2 / 6;
+    grid-column: 2 / 6;
+    grid-template-columns: repeat(3 , 1fr);
+    grid-template-rows: repeat(3 , 1fr);
+}
+
+.header,
+.side-left,
+.side-right,
+#game-board,
+footer {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
