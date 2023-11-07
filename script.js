@@ -1,8 +1,8 @@
 
   const board = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
+    ["X",2,3],
+    [4,"X",6],
+    [7,8,"X"]
   ]
 
   let player1 = {
@@ -35,10 +35,10 @@ function winGame(){
         text = text + board[i][j]
       }
       if (text === "XXX"){
-        return console.log("Player1 Wins")
+        return console.log(`${player1.name} Wins`)
       }
       else if (text === "OOO"){
-        return console.log("Player2 Wins")
+        return console.log(`${player2.name} Wins`)
       }
     text = '';
   }
@@ -48,30 +48,37 @@ function winGame(){
       text = text + board[j][i]
     }
     if (text === "XXX"){
-      return console.log("Player1 Wins")
+      return console.log(`${player1.name} Wins`)
     }
     else if (text === "OOO"){
-      return console.log("Player2 Wins")
+      return console.log(`${player2.name} Wins`)
     }
     text = '';
-    }
+  }
+
+  for (i = 0; i < 3; i++){
+    text = text + board[i][i]
+  }
+  if (text === "XXX"){
+    return console.log(`${player1.name} Wins`)
+  }
+  else if (text === "OOO"){
+    return console.log(`${player2.name} Wins`)
+  }
+  text = '';
+
+
+  for (i = 2; i >= 0; i--){
+    text = text + board[i][i]
+  } 
+  if (text === "XXX"){
+    return console.log(`${player1.name} Wins`)
+  }
+  else if (text === "OOO"){
+    return console.log(`${player2.name} Wins`)
+  }
+  text = '';
 }
 console.log(board)
-placeToken(player2 , 7)
-placeToken(player1 , 2)
-
-placeToken(player2 , 9)
-placeToken(player1 , 5)
-
-placeToken(player2 , 1)
-placeToken(player1 , 4)
-
-placeToken(player2 , 3)
-placeToken(player2 , 6)
-
-
-// placeToken(player1 , 7)
-// placeToken(player2 , 7)
-
 
 winGame()
