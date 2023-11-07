@@ -1,8 +1,8 @@
 function TicTacToe(fName, sName){
   let board = [
-      [1,2,3],
-      [4,5,6],
-      [7,8,9]
+      [],
+      [],
+      []
     ]
   let player1 = {
     name : fName,
@@ -14,6 +14,19 @@ function TicTacToe(fName, sName){
   }
   let actualPlayer = player1;
 
+//+ Create the GameBoard:
+const GameBoard = function makeBoard(){
+    let z = 4
+    let w = 1
+    for(y = 0; y < 3; y++){
+      for (i = w; i < z; i++){
+        let cell = document.querySelector(`.cell-${i}`)
+        board[y].push(cell.textContent)
+      }
+    z += 3
+    w += 3
+    }
+  }
 //+ Play a move:
   const placeToken = function (position) {
       for(i = 0; i < board.length ; i++){
@@ -93,37 +106,24 @@ function TicTacToe(fName, sName){
     if (actualPlayer === "player1")
     actualPlayer = "player2"
   }
+
+  function changeCellStyle(){
+    for (i = 1; i < 10; i++){
+      let cell = document.querySelector(`.cell-${i}`)
+      cell.addEventListener("click", () => cell.style.backgroundColor ="red")
+    }
+  }
+
+  function changeCellContent(){
+    
+  }
+
+
+  
   return {player1 , player2 , resetBoard , checkWinner, placeToken}
 }
 
 // TicTacToe().placeToken(5)
 
-function changeCellStyle(){
-  for (i = 1; i < 10; i++){
-    let cell = document.querySelector(`.cell-${i}`)
-    cell.addEventListener("click", () => cell.style.backgroundColor ="red")
-  }
-}
 
-function changeCellContent(){
-  let board = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
-  ]
 
-  let player1 = {
-    name : fName,
-    token : "X"
-  }
-
-  let player2 = {
-    name : sName,
-    token : "O"
-  }
-  for (i = 1; i < 10; i++){
-    let cell = document.querySelector(`.cell-${i}`)
-    cell.addEventListener("click", () => {
-    })
-  }
-}
