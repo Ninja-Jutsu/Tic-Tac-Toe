@@ -1,7 +1,6 @@
 function collectInput(){
   let player1 = document.querySelector(".player1").value
   let player2 = document.querySelector(".player2").value
-  console.log(player1 , player2)
   return {player1 , player2}
   } 
 
@@ -20,12 +19,12 @@ function TicTacToe(){
     token : "O"
   }
   let actualPlayer = player1;
-  console.log(player1 , player2)
+
 
 //+ Create the GameBoard:
   const GameBoard = function (){
-    let z = 4
-    let w = 1
+    let z = 3
+    let w = 0
     for(y = 0; y < 3; y++){
       for (i = w; i < z; i++){
         let cell = document.querySelector(`.cell-${i}`)
@@ -35,11 +34,14 @@ function TicTacToe(){
     w += 3
     }
   }
-  GameBoard()
 
 //+ Play a move:
-  const placeToken = function (position) {
-      for(i = 0; i < board.length ; i++){
+
+  const placeToken = function () {
+      for(i = 0; i < 9 ; i++){
+      let cell = document.querySelector(`.cell-${i}`)
+      let position = cell.innerText
+      console.log(position)
       let tokenPosition = board[i].findIndex(cell => cell === position)
         if (tokenPosition === -1){
           continue
@@ -47,15 +49,22 @@ function TicTacToe(){
         else {
           board[i][tokenPosition] = actualPlayer.token
           switchPlayer()
+          console.log(board)
         }
       }
       console.log(board)
   }
-placeToken("1")
-placeToken("5")
-placeToken("2")
-placeToken("6")
-placeToken("3")
+
+  const placeTokenOnScreen = function () {
+    for (i = 0; i < 9 ; i++){
+      let cell = document.querySelector(`.cell-${i}`)
+      // cell.addEventListener("click", placeToken)
+      cell.addEventListener("click", () => {
+        cell.innerText = actualPlayer.token
+      })
+    }
+  }
+  placeTokenOnScreen()
 
 //+ Check THe winner:
   const checkWinner = function (){
@@ -125,15 +134,26 @@ placeToken("3")
     }
 
   function changeCellStyle(){
-    for (i = 1; i < 10; i++){
+    for (i = 0; i < 9; i++){
       let cell = document.querySelector(`.cell-${i}`)
       cell.addEventListener("click", () => cell.style.backgroundColor ="red")
     }
   }
+
+  //+ Functions Invocation:
+  GameBoard()
   return {player1 , player2 , resetBoard , checkWinner, placeToken}
 }
 
+function hidePopup(){
+  let popup = document.querySelector(".player-details")
+  popup.style.display = "none"
+}
 
+//! Execute functions:
 let startBtn = document.getElementById("start-btn")
 startBtn.addEventListener("click" , collectInput)
-startBtn.addEventListener('click', TicTacToe)
+startBtn.addEventListener("click" , TicTacToe)
+startBtn.addEventListener('click', hidePopup)
+
+
