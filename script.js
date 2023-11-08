@@ -1,22 +1,28 @@
-function TicTacToe(fName, sName){
+function collectInput(){
+  let player1 = document.querySelector(".player1").value
+  let player2 = document.querySelector(".player2").value
+  console.log(player1 , player2)
+  return {player1 , player2}
+  } 
+
+function TicTacToe(){
   let board = [
       [],
       [],
       []
     ]
   let player1 = {
-    name : fName,
+    name : collectInput().player1,
     token : "X"
   }
   let player2 = {
-    name : sName,
+    name : collectInput().player2,
     token : "O"
   }
   let actualPlayer = player1;
-
+  console.log(player1 , player2)
 
 //+ Create the GameBoard:
-const GameBoard = function makeBoard(){
   const GameBoard = function (){
     let z = 4
     let w = 1
@@ -33,7 +39,6 @@ const GameBoard = function makeBoard(){
 
 //+ Play a move:
   const placeToken = function (position) {
-    console.log(board)
       for(i = 0; i < board.length ; i++){
       let tokenPosition = board[i].findIndex(cell => cell === position)
         if (tokenPosition === -1){
@@ -42,15 +47,15 @@ const GameBoard = function makeBoard(){
         else {
           board[i][tokenPosition] = actualPlayer.token
           switchPlayer()
-          console.log(actualPlayer)
         }
       }
       console.log(board)
   }
-
-  placeToken("5")
-  placeToken("7")
-
+placeToken("1")
+placeToken("5")
+placeToken("2")
+placeToken("6")
+placeToken("3")
 
 //+ Check THe winner:
   const checkWinner = function (){
@@ -65,7 +70,8 @@ const GameBoard = function makeBoard(){
     else if (line === "OOO"){
       return console.log(`${player2.name} Wins`)
     }
-    //* Loop diagonally from top/right:
+
+  //* Loop diagonally from top/right:
     for (i = 2, j = 0; i >= 0 && j < 3; i--, j++){
       line += board[i][j]
     } 
@@ -74,12 +80,45 @@ const GameBoard = function makeBoard(){
     }
     else if (line === "OOO"){
       return console.log(`${player2.name} Wins`)
-@git c
+    }
+
+  //* Loop through columns
+    for (i = 0; i < 3 ; i++){
+      const columns = board.map(array => array[i]);
+      line = columns.toString();
+      if (line === "X,X,X"){
+        return console.log(`${player1.name} Wins`)
+      }
+      else if (line === "O,O,O"){
+        return console.log(`${player2.name} Wins`)
+      }
+    }
+
+  //* Loop through rows:
+    for (i = 0; i < 3 ; i ++){ 
+      line = board[i].toString();
+      if (line === "X,X,X"){
+        return console.log(`${player1.name} Wins`)
+      }
+      else if (line === "O,O,O"){
+        return console.log(`${player2.name} Wins`)
+      }
+    }
+    line = '';
+  }
+
+  checkWinner()
+  //+ Reset the GameBoard:
+  const resetBoard = function(){
+    board = [
+      [],
+      [],
+      []
+    ]
+    return console.log(board)
+  }
 
   function switchPlayer(){
-    if (actualPlayer === "player1")
-    actualPlayer = "player2"
-  }
     if (actualPlayer === player2)
     actualPlayer = player1
     else{actualPlayer = player2}
@@ -91,17 +130,10 @@ const GameBoard = function makeBoard(){
       cell.addEventListener("click", () => cell.style.backgroundColor ="red")
     }
   }
-
-  function changeCellContent(){
-
-  }
-
-
-
   return {player1 , player2 , resetBoard , checkWinner, placeToken}
 }
 
-// TicTacToe().placeToken(5)
 
-
-TicTacToe("Is", "Van")
+let startBtn = document.getElementById("start-btn")
+startBtn.addEventListener("click" , collectInput)
+startBtn.addEventListener('click', TicTacToe)

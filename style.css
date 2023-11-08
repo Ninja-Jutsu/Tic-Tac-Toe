@@ -94,14 +94,3 @@ footer {
     align-items: center;
     gap: 0.3rem;
 }
-
-
-/* // function collectInput(){
-    //     let player1 = document.querySelector(".player1").value
-    //     let player2 = document.querySelector(".player2").value
-    //   console.log(player1, player2)
-    //     return TicTacToe(player1 , player2)
-    //   } 
-    
-    // let startBtn = document.getElementById("start-btn")
-    // startBtn.addEventListener("click" , collectInput) */
