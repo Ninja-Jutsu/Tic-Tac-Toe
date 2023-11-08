@@ -37,14 +37,19 @@ function TicTacToe(){
 
 //+ Play a move:
 
-  const placeToken = function () {
-      for(i = 0; i < 9 ; i++){
-      let cell = document.querySelector(`.cell-${i}`)
+  const placeTokenInTheBoard = function () {
+    for(i = 0; i < 9 ; i++){
+      let cell = document.querySelector(`.cell-${i}`);
       let position = cell.innerText
-      console.log(position)
-      let tokenPosition = board[i].findIndex(cell => cell === position)
+      cell.addEventListener("click" , targetCell)
+
+      function targetCell(){
+        console.log(i)
+        let tokenPosition = board[i].findIndex(x => x === position);
+        console.log(position)
+        console.log(tokenPosition)
         if (tokenPosition === -1){
-          continue
+          console.log("Not found")
         }
         else {
           board[i][tokenPosition] = actualPlayer.token
@@ -52,22 +57,12 @@ function TicTacToe(){
           console.log(board)
         }
       }
-      console.log(board)
-  }
-
-  const placeTokenOnScreen = function () {
-    for (i = 0; i < 9 ; i++){
-      let cell = document.querySelector(`.cell-${i}`)
-      // cell.addEventListener("click", placeToken)
-      cell.addEventListener("click", () => {
-        cell.innerText = actualPlayer.token
-      })
     }
   }
-  placeTokenOnScreen()
+
 
 //+ Check THe winner:
-  const checkWinner = function (){
+  function checkWinner (){
     let line = ''
     //! Loop diagonally from top/left:
     for (i = 0; i < 3; i++){
@@ -116,7 +111,18 @@ function TicTacToe(){
     line = '';
   }
 
-  checkWinner()
+  function placeTokenOnScreen() {
+    for (i = 0; i < 9 ; i++){
+      let cell = document.querySelector(`.cell-${i}`)
+      cell.addEventListener("click", () => {
+        cell.innerText = actualPlayer.token
+      })
+    }
+  }
+  placeTokenInTheBoard()
+  placeTokenOnScreen()
+
+
   //+ Reset the GameBoard:
   const resetBoard = function(){
     board = [
@@ -142,7 +148,7 @@ function TicTacToe(){
 
   //+ Functions Invocation:
   GameBoard()
-  return {player1 , player2 , resetBoard , checkWinner, placeToken}
+  return {player1 , player2 , resetBoard , checkWinner, placeTokenInTheBoard}
 }
 
 function hidePopup(){
@@ -152,8 +158,10 @@ function hidePopup(){
 
 //! Execute functions:
 let startBtn = document.getElementById("start-btn")
+let entireBoard = document.getElementById("game-board")
 startBtn.addEventListener("click" , collectInput)
 startBtn.addEventListener("click" , TicTacToe)
 startBtn.addEventListener('click', hidePopup)
+entireBoard.addEventListener("click" , TicTacToe().checkWinner)
 
 
