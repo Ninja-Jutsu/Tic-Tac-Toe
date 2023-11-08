@@ -22,7 +22,12 @@ function TicTacToe(){
 
 
 //+ Create the GameBoard:
-  const GameBoard = function (){
+   function GameBoard(){
+    board = [
+      [],
+      [],
+      []
+    ]
     let z = 3
     let w = 0
     for(y = 0; y < 3; y++){
@@ -33,33 +38,20 @@ function TicTacToe(){
     z += 3
     w += 3
     }
+    console.log(board)
   }
 
-//+ Play a move:
-
-  const placeTokenInTheBoard = function () {
-    for(i = 0; i < 9 ; i++){
-      let cell = document.querySelector(`.cell-${i}`);
-      let position = cell.innerText
-      cell.addEventListener("click" , targetCell)
-
-      function targetCell(){
-        console.log(i)
-        let tokenPosition = board[i].findIndex(x => x === position);
-        console.log(position)
-        console.log(tokenPosition)
-        if (tokenPosition === -1){
-          console.log("Not found")
+  function placeTokenOnScreen() {
+    for (i = 0; i < 9 ; i++){
+      let cell = document.querySelector(`.cell-${i}`)
+      cell.addEventListener("click", () => {
+        if(cell.innerText !== "X" && cell.innerText !== "O"){
+        cell.innerText = actualPlayer.token
+        switchPlayer()
         }
-        else {
-          board[i][tokenPosition] = actualPlayer.token
-          switchPlayer()
-          console.log(board)
-        }
-      }
+      })
     }
   }
-
 
 //+ Check THe winner:
   function checkWinner (){
@@ -111,17 +103,6 @@ function TicTacToe(){
     line = '';
   }
 
-  function placeTokenOnScreen() {
-    for (i = 0; i < 9 ; i++){
-      let cell = document.querySelector(`.cell-${i}`)
-      cell.addEventListener("click", () => {
-        cell.innerText = actualPlayer.token
-      })
-    }
-  }
-  placeTokenInTheBoard()
-  placeTokenOnScreen()
-
 
   //+ Reset the GameBoard:
   const resetBoard = function(){
@@ -146,9 +127,14 @@ function TicTacToe(){
     }
   }
 
+  let entireBoard = document.getElementById("game-board")
+  entireBoard.addEventListener("click" , placeTokenOnScreen)
+  entireBoard.addEventListener("click" , GameBoard)
+  entireBoard.addEventListener("click" , checkWinner)
+
+  
   //+ Functions Invocation:
-  GameBoard()
-  return {player1 , player2 , resetBoard , checkWinner, placeTokenInTheBoard}
+  return {resetBoard , checkWinner, placeTokenOnScreen, GameBoard}
 }
 
 function hidePopup(){
@@ -157,11 +143,17 @@ function hidePopup(){
 }
 
 //! Execute functions:
+
 let startBtn = document.getElementById("start-btn")
 let entireBoard = document.getElementById("game-board")
 startBtn.addEventListener("click" , collectInput)
-startBtn.addEventListener("click" , TicTacToe)
+// startBtn.addEventListener("click" , TicTacToe)
 startBtn.addEventListener('click', hidePopup)
-entireBoard.addEventListener("click" , TicTacToe().checkWinner)
+startBtn.addEventListener("click", TicTacToe)
+// entireBoard.addEventListener("click" , TicTacToe().placeTokenOnScreen)
+// entireBoard.addEventListener("click" , TicTacToe().GameBoard)
+// entireBoard.addEventListener("click" , TicTacToe().checkWinner)
+
+
 
 
