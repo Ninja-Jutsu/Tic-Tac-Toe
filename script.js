@@ -1,25 +1,27 @@
-function collectInput(){
-  let player1 = document.querySelector(".player1").value
-  let player2 = document.querySelector(".player2").value
-  return {player1 , player2}
-  } 
-
 function TicTacToe(){
   let board = [
       [],
       [],
       []
     ]
+
+  let firstInput = document.querySelector(".player1").value
+  let secondInput = document.querySelector(".player2").value
+  let player1Name = document.querySelector(".name-player1")
+  let player2Name = document.querySelector(".name-player2")
   let player1 = {
-    name : collectInput().player1,
-    token : "X"
+    name : firstInput,
+    token : "X",
+    color : "blue",
+    streak: 0
   }
   let player2 = {
-    name : collectInput().player2,
-    token : "O"
+    name : secondInput,
+    token : "O",
+    color : "red",
+    streak: 0
   }
   let actualPlayer = player1;
-
 
 //+ Create the GameBoard:
    function GameBoard(){
@@ -38,11 +40,10 @@ function TicTacToe(){
     z += 3
     w += 3
     }
-    console.log(board)
   }
 
   function placeTokenOnScreen() {
-    for (i = 0; i < 9 ; i++){
+    for (i = 0; i < 9 ; i++){ // we dont need this loop can use .cell
       let cell = document.querySelector(`.cell-${i}`)
       cell.addEventListener("click", () => {
         if(cell.innerText !== "X" && cell.innerText !== "O"){
@@ -53,64 +54,89 @@ function TicTacToe(){
     }
   }
 
+  
+
 //+ Check THe winner:
+  
   function checkWinner (){
     let line = ''
-    //! Loop diagonally from top/left:
+    let winner = document.querySelector(".winner")
+    let stopScreenDisplay = document.querySelector(".stop-game")
+    let streakPlayer1 = document.querySelector(".streak-player1")
+    let streakPlayer2 = document.querySelector(".streak-player2")
+
+    //* Loop diagonally from top/left:
     for (i = 0; i < 3; i++){
       line += board[i][i]
     }
-    if (line === "XXX"){
-      return console.log(`${player1.name} Wins`)
-    }
-    else if (line === "OOO"){
-      return console.log(`${player2.name} Wins`)
-    }
-
-  //* Loop diagonally from top/right:
-    for (i = 2, j = 0; i >= 0 && j < 3; i--, j++){
-      line += board[i][j]
+    verifyLine()
+    //* Loop diagonally from top/right:
+    let z = 0;
+    for (i = 2; i >= 0; i--){
+        line += board[z][i]
+        z++
     } 
-    if (line === "XXX"){
-      return console.log(`${player1.name} Wins`)
-    }
-    else if (line === "OOO"){
-      return console.log(`${player2.name} Wins`)
-    }
+    verifyLine()
+    
 
-  //* Loop through columns
+    //* Loop through columns
     for (i = 0; i < 3 ; i++){
       const columns = board.map(array => array[i]);
       line = columns.toString();
-      if (line === "X,X,X"){
-        return console.log(`${player1.name} Wins`)
-      }
-      else if (line === "O,O,O"){
-        return console.log(`${player2.name} Wins`)
-      }
+      verifyLine()
     }
 
-  //* Loop through rows:
+    //* Loop through rows:
     for (i = 0; i < 3 ; i ++){ 
       line = board[i].toString();
-      if (line === "X,X,X"){
-        return console.log(`${player1.name} Wins`)
-      }
-      else if (line === "O,O,O"){
-        return console.log(`${player2.name} Wins`)
-      }
+      verifyLine()
     }
     line = '';
-  }
 
+    function verifyLine(){
+      if (line === "XXX" || line === "X,X,X"){
+        winner.innerText = `${player1.name} Wins`
+        stopScreenDisplay.style.display = 'flex'
+        player1.streak++
+        streakPlayer1.innerText = player1.streak
+        return 
+      }
+      else if (line === "OOO" || line === "O,O,O"){
+        winner.innerText = `${player2.name} Wins`
+        stopScreenDisplay.style.display = 'flex'
+        player2.streak++
+        streakPlayer2.innerText = player2.streak
+        return
+      }
+      line = '';
+    }
+
+    function drawGame(){
+      let cellsContent = []
+      let boardIsFull = false
+      for (i = 0; i < 3 ; i++){
+        
+        for (j = 0; j < 3; j++){
+          cellsContent.push(board[i][j])
+        }
+      }
+      boardIsFull = cellsContent.every(cell => cell === "X" || cell === "O");
+      console.log(cellsContent)
+      if(boardIsFull === true){
+        stopScreenDisplay.style.display = 'flex'
+        winner.innerText = `DRAW`
+        resetBoard()
+      }
+    }
+    drawGame()
+  }
 
   //+ Reset the GameBoard:
   const resetBoard = function(){
-    board = [
-      [],
-      [],
-      []
-    ]
+    for (i = 0 , j = 1; i < 9 && j < 10; i++ , j++){
+      let cell = document.querySelector(`.cell-${i}`)
+      cell.innerText = j.toString()
+    }
     return console.log(board)
   }
 
@@ -127,32 +153,44 @@ function TicTacToe(){
     }
   }
 
+  function displayNames(){
+    player1Name.innerHTML = player1.name
+    player2Name.innerHTML = player2.name
+  }
+
+  //+ Functions Invocation:
+  placeTokenOnScreen()
+  displayNames()
   let entireBoard = document.getElementById("game-board")
+  let newGame = document.querySelector('.new-game')
+  let stopScreenDisplay = document.querySelector(".stop-game")
+  let startBtn = document.getElementById("start-btn")
+
   entireBoard.addEventListener("click" , placeTokenOnScreen)
   entireBoard.addEventListener("click" , GameBoard)
   entireBoard.addEventListener("click" , checkWinner)
-
-  
-  //+ Functions Invocation:
-  return {resetBoard , checkWinner, placeTokenOnScreen, GameBoard}
+  newGame.addEventListener("click", function(){
+    stopScreenDisplay.style.display = 'none';
+    resetBoard()
+  })
+  return {player1, player2}
 }
+
 
 function hidePopup(){
   let popup = document.querySelector(".player-details")
+  if (TicTacToe().firstInput !== '' || TicTacToe().secondInput !== ''){
   popup.style.display = "none"
+  }
 }
 
 //! Execute functions:
-
 let startBtn = document.getElementById("start-btn")
-let entireBoard = document.getElementById("game-board")
-startBtn.addEventListener("click" , collectInput)
-// startBtn.addEventListener("click" , TicTacToe)
-startBtn.addEventListener('click', hidePopup)
-startBtn.addEventListener("click", TicTacToe)
-// entireBoard.addEventListener("click" , TicTacToe().placeTokenOnScreen)
-// entireBoard.addEventListener("click" , TicTacToe().GameBoard)
-// entireBoard.addEventListener("click" , TicTacToe().checkWinner)
+
+  startBtn.addEventListener("click", TicTacToe)
+  startBtn.addEventListener('click', hidePopup)
+  
+
 
 
 

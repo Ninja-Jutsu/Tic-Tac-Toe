@@ -13,7 +13,10 @@
         <header class="header">
             <h1 class="title">Title</h1>
         </header>
-        <div class="side-left">ASIDE</div>
+        <div class="side-left">
+            <p class="name-player1">Player 1:</p>
+            <p class="streak-player1">0</p>
+        </div>
         <main id="game-board">
             <div class="cell cell-0">1</div>
             <div class="cell cell-1">2</div>
@@ -25,7 +28,10 @@
             <div class="cell cell-7">8</div>
             <div class="cell cell-8">9</div>
         </main>
-        <div class="side-right">ASIDE</div>
+        <div class="side-right">
+            <p class="name-player2">Player 2:</p>
+            <p class="streak-player2">0</p>
+        </div>
         <footer></footer>
         <div class="player-details">
             <div class="w3-container w3-blue form-header">
@@ -34,14 +40,20 @@
               <div class="w3-container form-container">
                 <p>
                     <label><h3>First Player (X)</h3></label>
-                    <input class="w3-input player1" type="text" value="vanessa">
+                    <input class="w3-input player1" type="text" required maxlength="10">
                 </p>
                 <p>
                     <label><h3>Second Player (O)</h3></label>
-                    <input class="w3-input player2" type="text" value="Ismail">
+                    <input class="w3-input player2" type="text" required maxlength="10">
                 </p>
                 <button class="w3-btn w3-blue" id="start-btn">Start Game</button>
             </div>
+        </div>
+    </div>
+    <div class="stop-game">
+        <div class="stop-game-content">
+            <div class="winner">Display result</div>
+            <button class="new-game">New Game</button>
         </div>
     </div>
 </body>
