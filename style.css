@@ -1,3 +1,29 @@
+@font-face {
+    font-family: MainFont;
+    src:
+        url(fonts/American\ Typewriter\ Bold.woff) format(woff),
+        url(fonts/American\ Typewriter\ Bold.woff2) format(woff2)
+ }
+
+ @font-face {
+    font-family: BtnFont;
+    src: 
+        url(fonts/Sansation\ Light.woff) format(woff)
+ }
+ 
+ :root {
+    --main-color: #fde68a;
+    --secondary-color:#9e7438;
+    --third-color:#eab308;
+    --player1-main-color: #be185d;
+    --cell-border: #f4f4f5;
+    --player2-main-color:#1e40af;
+    --border-color: #18181b;
+    --main-font: MainFont;
+    --btn-font: BtnFont;
+ }
+ 
+
  *,
  *::before,
  *::after {
@@ -11,33 +37,55 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: pink;
+    background-color: var(--main-color);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr) 50px;
 }
 
 .header {
     grid-column: 1 / 7;
-    background-color: aqua;
+    background-color: var(--third-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header p{
+    font-size: 4rem;
+    font-family: var(--main-font);
+}
+
+.paw {
+    visibility: hidden;
+    width: 50px;
+}
+
+.paw1,.paw4,.paw3,.paw6{
+    margin-top: 40px;
+}
+
+.paw2, .paw5{
+    margin-bottom: 50px;
 }
 
 .side-left {
     grid-row: 2 / 6;
-    background-color: aliceblue;
+    background-color: var(--secondary-color);
 
 }
 
 .side-right {
     grid-column: 6 / 7;
     grid-row: 2 / 6;
-    background-color: lightgoldenrodyellow;
+    background-color: var(--secondary-color);
 }
 
 footer{
     grid-column: 1 / 7;
     grid-row: 6 / 7;
-    background-color: lightsalmon;
+    background-color: var(--third-color);
 }
 
 #game-board {
@@ -45,9 +93,9 @@ footer{
     grid-column: 2 / 6;
     grid-template-columns: repeat(3 , 1fr);
     grid-template-rows: repeat(3 , 1fr);
+    margin: 5px 0px;
 }
 
-.header,
 .side-left,
 .side-right,
 #game-board,
@@ -63,11 +111,12 @@ footer {
     align-items: center;
     font-size: 3rem;
     font-weight: bold;
-    border: 2px solid gold;
+    border: 2px solid var(--border-color);
+    font-size: 5vw;
 }
 
 #game-board {
-    border: 2px solid red;
+    border: 2px solid var(--border-color);
 }
 
 
@@ -82,6 +131,7 @@ footer {
     transform: translate(-50%, -50%);
     background-color: beige;
     padding: 10px;
+    font-weight: bold;
 }
 
 #player {
@@ -107,7 +157,6 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 5rem;
- 
 }
 
 .stop-game-content {
@@ -120,7 +169,7 @@ footer {
 
 .stop-game button {
     border: none;
-    background-color: lightgreen;
+    background-color: var(--third-color);
     cursor: pointer;
     border-radius: 16px;
     padding: 5px;
@@ -128,5 +177,26 @@ footer {
 
 .stop-game button:hover {
     transform: scale(0.97);
-    background-color: rgb(131, 234, 131);
+    background-color: #b88c06;
+}
+
+.form-header {
+    text-align: center;
+}
+
+.side-left,
+.side-right{
+    justify-items: center;
+    font-size: 3rem;
+    gap: 2rem;
+    margin: 5px 5px;
+}
+
+.streak-player1,
+.streak-player2 {
+    font-size: 4rem;
+}
+
+.title {
+    visibility: hidden;
 }

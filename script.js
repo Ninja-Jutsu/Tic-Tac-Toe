@@ -4,7 +4,6 @@ function TicTacToe(){
       [],
       []
     ]
-
   let firstInput = document.querySelector(".player1").value
   let secondInput = document.querySelector(".player2").value
   let player1Name = document.querySelector(".name-player1")
@@ -23,8 +22,17 @@ function TicTacToe(){
   }
   let actualPlayer = player1;
 
+  function fillPlayerName(){
+    if (firstInput === ""){
+      player1.name = "Player 1"
+    }
+    if (secondInput === ""){
+      player2.name = "Player 2"
+    }
+  }
+  
 //+ Create the GameBoard:
-   function GameBoard(){
+   function makeGameBoard(){
     board = [
       [],
       [],
@@ -54,10 +62,7 @@ function TicTacToe(){
     }
   }
 
-  
-
 //+ Check THe winner:
-  
   function checkWinner (){
     let line = ''
     let winner = document.querySelector(".winner")
@@ -77,8 +82,6 @@ function TicTacToe(){
         z++
     } 
     verifyLine()
-    
-
     //* Loop through columns
     for (i = 0; i < 3 ; i++){
       const columns = board.map(array => array[i]);
@@ -146,29 +149,38 @@ function TicTacToe(){
     else{actualPlayer = player2}
     }
 
-  function changeCellStyle(){
-    for (i = 0; i < 9; i++){
-      let cell = document.querySelector(`.cell-${i}`)
-      cell.addEventListener("click", () => cell.style.backgroundColor ="red")
-    }
-  }
+  // function changeCellStyle(){
+  //   for (i = 0; i < 9; i++){
+  //     let cell = document.querySelector(`.cell-${i}`)
+  //     cell.addEventListener("click", () => cell.style.backgroundColor ="red")
+  //   }
+  // }
 
   function displayNames(){
     player1Name.innerHTML = player1.name
     player2Name.innerHTML = player2.name
   }
 
+  function hidePopup(){
+    let popup = document.querySelector(".player-details")
+    if (firstInput !== '' || secondInput !== ''){
+    popup.style.display = "none"
+    console.log("hello")
+    }
+  }
   //+ Functions Invocation:
+  fillPlayerName()
   placeTokenOnScreen()
   displayNames()
+  hidePopup()
   let entireBoard = document.getElementById("game-board")
   let newGame = document.querySelector('.new-game')
   let stopScreenDisplay = document.querySelector(".stop-game")
   let startBtn = document.getElementById("start-btn")
-
   entireBoard.addEventListener("click" , placeTokenOnScreen)
-  entireBoard.addEventListener("click" , GameBoard)
+  entireBoard.addEventListener("click" , makeGameBoard)
   entireBoard.addEventListener("click" , checkWinner)
+  startBtn.addEventListener("click", hidePopup)
   newGame.addEventListener("click", function(){
     stopScreenDisplay.style.display = 'none';
     resetBoard()
@@ -177,21 +189,22 @@ function TicTacToe(){
 }
 
 
-function hidePopup(){
-  let popup = document.querySelector(".player-details")
-  if (TicTacToe().firstInput !== '' || TicTacToe().secondInput !== ''){
-  popup.style.display = "none"
-  }
+let startBtn = document.getElementById("start-btn")
+startBtn.addEventListener("click", TicTacToe)
+
+
+function displayPaw(){
+  setTimeout(() => {document.querySelector(".paw1").style.visibility = "visible"}, 500)
+  setTimeout(() => {document.querySelector(".paw2").style.visibility = "visible"}, 1000)
+  setTimeout(() => {document.querySelector(".paw3").style.visibility = "visible"}, 1500)
+
+  setTimeout(() => {document.querySelector(".Tic").style.visibility = "visible"}, 2000)
+  setTimeout(() => {document.querySelector(".Tac").style.visibility = "visible"}, 2500)
+  setTimeout(() => {document.querySelector(".Toe").style.visibility = "visible"}, 3000)
+
+  setTimeout(() => {document.querySelector(".paw4").style.visibility = "visible"}, 3500)
+  setTimeout(() => {document.querySelector(cell".paw5").style.visibility = "visible"}, 4000)
+  setTimeout(() => {document.querySelector(".paw6").style.visibility = "visible"}, 4500)
 }
 
-//! Execute functions:
-let startBtn = document.getElementById("start-btn")
-
-  startBtn.addEventListener("click", TicTacToe)
-  startBtn.addEventListener('click', hidePopup)
-  
-
-
-
-
-
+setTimeout(displayPaw(), 1000)
