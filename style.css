@@ -184,11 +184,16 @@ footer {
     text-align: center;
 }
 
-.side-left,
-.side-right{
+.side-left{
     justify-items: center;
     font-size: 3rem;
     gap: 2rem;
+    margin: 5px 5px;
+}
+.side-right {
+    justify-items: center;
+    font-size: 3rem;
+    gap: 1rem;
     margin: 5px 5px;
 }
 
@@ -199,4 +204,24 @@ footer {
 
 .title {
     visibility: hidden;
+}
+
+#game-board .cell {
+    display: grid;
+    grid-template-columns: 1fr;
+
+}
+.cell span {
+    visibility: hidden;
+    font-size: 9rem;
+    text-align: center;
+}
+
+img[alt="cat"]{
+    width: 10vw;
+}
+
+img[alt='dog']{
+    width: 13vw;
+    padding: 0;
 }

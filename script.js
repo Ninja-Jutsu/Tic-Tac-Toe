@@ -54,8 +54,10 @@ function TicTacToe(){
     for (i = 0; i < 9 ; i++){ // we dont need this loop can use .cell
       let cell = document.querySelector(`.cell-${i}`)
       cell.addEventListener("click", () => {
-        if(cell.innerText !== "X" && cell.innerText !== "O"){
+        console.log(cell.innerHTML)
+        if(cell.innerHTML !== "X" && cell.innerHTML !== "O"){
         cell.innerText = actualPlayer.token
+        cell.style.visibility = "visible"
         switchPlayer()
         }
       })
@@ -203,7 +205,7 @@ function displayPaw(){
   setTimeout(() => {document.querySelector(".Toe").style.visibility = "visible"}, 3000)
 
   setTimeout(() => {document.querySelector(".paw4").style.visibility = "visible"}, 3500)
-  setTimeout(() => {document.querySelector(cell".paw5").style.visibility = "visible"}, 4000)
+  setTimeout(() => {document.querySelector(".paw5").style.visibility = "visible"}, 4000)
   setTimeout(() => {document.querySelector(".paw6").style.visibility = "visible"}, 4500)
 }
 
