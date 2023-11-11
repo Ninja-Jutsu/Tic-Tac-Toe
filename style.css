@@ -132,6 +132,8 @@ footer {
     background-color: beige;
     padding: 10px;
     font-weight: bold;
+    scale: 1;
+    transition: scale 0.5s ease-in-out;
 }
 
 #player {
@@ -164,7 +166,7 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    
+
 }
 
 .stop-game button {
@@ -213,7 +215,7 @@ footer {
 }
 .cell span {
     visibility: hidden;
-    font-size: 9rem;
+    font-size: 5vh;
     text-align: center;
 }
 

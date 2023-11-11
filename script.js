@@ -44,6 +44,12 @@ function TicTacToe(){
       for (i = w; i < z; i++){
         let cell = document.querySelector(`.cell-${i}`)
         board[y].push(cell.textContent)
+        if(cell.innerText === "X"){
+          cell.style.backgroundColor = "#be185d"
+        }
+        else if(cell.innerText === "O"){
+          cell.style.backgroundColor = "#1e40af"
+        }
       }
     z += 3
     w += 3
@@ -54,10 +60,9 @@ function TicTacToe(){
     for (i = 0; i < 9 ; i++){ // we dont need this loop can use .cell
       let cell = document.querySelector(`.cell-${i}`)
       cell.addEventListener("click", () => {
-        console.log(cell.innerHTML)
         if(cell.innerHTML !== "X" && cell.innerHTML !== "O"){
         cell.innerText = actualPlayer.token
-        cell.style.visibility = "visible"
+        cell.style.color = "black"
         switchPlayer()
         }
       })
@@ -141,6 +146,8 @@ function TicTacToe(){
     for (i = 0 , j = 1; i < 9 && j < 10; i++ , j++){
       let cell = document.querySelector(`.cell-${i}`)
       cell.innerText = j.toString()
+      cell.style.color = "#fde68a"
+      cell.style.backgroundColor = "#fde68a"
     }
     return console.log(board)
   }
@@ -165,10 +172,8 @@ function TicTacToe(){
 
   function hidePopup(){
     let popup = document.querySelector(".player-details")
-    if (firstInput !== '' || secondInput !== ''){
-    popup.style.display = "none"
+    popup.style.scale = "0"
     console.log("hello")
-    }
   }
   //+ Functions Invocation:
   fillPlayerName()
