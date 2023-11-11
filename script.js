@@ -11,13 +11,13 @@ function TicTacToe(){
   let player1 = {
     name : firstInput,
     token : "X",
-    color : "blue",
+    color : "#1e40af",
     streak: 0
   }
   let player2 = {
     name : secondInput,
     token : "O",
-    color : "red",
+    color : "#be185d",
     streak: 0
   }
   let actualPlayer = player1;
@@ -45,10 +45,10 @@ function TicTacToe(){
         let cell = document.querySelector(`.cell-${i}`)
         board[y].push(cell.textContent)
         if(cell.innerText === "X"){
-          cell.style.backgroundColor = "#be185d"
+          cell.style.backgroundColor = player1.color
         }
         else if(cell.innerText === "O"){
-          cell.style.backgroundColor = "#1e40af"
+          cell.style.backgroundColor = player2.color
         }
       }
     z += 3
@@ -76,6 +76,25 @@ function TicTacToe(){
     let stopScreenDisplay = document.querySelector(".stop-game")
     let streakPlayer1 = document.querySelector(".streak-player1")
     let streakPlayer2 = document.querySelector(".streak-player2")
+
+    //* Check if the board still has space
+    function drawGame(){
+      let cellsContent = []
+      let boardIsFull = false
+      for (i = 0; i < 3 ; i++){
+        for (j = 0; j < 3; j++){
+          cellsContent.push(board[i][j])
+        }
+      }
+      boardIsFull = cellsContent.every(cell => cell === "X" || cell === "O");
+      verifyLine()
+      if(boardIsFull === true){
+        stopScreenDisplay.style.display = 'flex'
+        winner.innerText = `DRAW`
+        resetBoard()
+      }
+    }
+    drawGame()
 
     //* Loop diagonally from top/left:
     for (i = 0; i < 3; i++){
@@ -120,24 +139,6 @@ function TicTacToe(){
       }
       line = '';
     }
-
-    function drawGame(){
-      let cellsContent = []
-      let boardIsFull = false
-      for (i = 0; i < 3 ; i++){
-        for (j = 0; j < 3; j++){
-          cellsContent.push(board[i][j])
-        }
-      }
-      boardIsFull = cellsContent.every(cell => cell === "X" || cell === "O");
-      verifyLine()
-      if(boardIsFull === true){
-        stopScreenDisplay.style.display = 'flex'
-        winner.innerText = `DRAW`
-        resetBoard()
-      }
-    }
-    drawGame()
   }
 
   //+ Reset the GameBoard:
