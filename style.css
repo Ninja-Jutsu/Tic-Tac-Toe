@@ -214,9 +214,11 @@ footer {
 
 }
 .cell span {
-    visibility: hidden;
-    font-size: 5vh;
+    font-size: 16vh;
     text-align: center;
+    color: var(--main-color);
+    cursor: pointer;
+    user-select: none;
 }
 
 img[alt="cat"]{
