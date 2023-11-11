@@ -35,12 +35,12 @@
 
 .container{
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: var(--main-color);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 100px 100px repeat(3, 1fr) 50px;
+    grid-template-rows: 100px 100px repeat(3, 1fr);
 }
 
 .header {
@@ -49,17 +49,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
 }
 
 .header p{
-    font-size: 4rem;
+    font-size: 2rem;
     font-family: var(--main-font);
 }
 
 .paw {
     visibility: hidden;
-    width: 50px;
+    width: 20px;
 }
 
 .paw1,.paw4,.paw3,.paw6{
@@ -96,6 +95,7 @@ footer{
     grid-column: 1 / 7;
     grid-row: 6 / 7;
     background-color: var(--third-color);
+    height: 50px;
 }
 
 #game-board {
@@ -144,7 +144,7 @@ footer {
     display: grid;
     position: absolute;
     height: max-content;
-    width: 50vw;
+    width: 70vw;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

@@ -125,13 +125,12 @@ function TicTacToe(){
       let cellsContent = []
       let boardIsFull = false
       for (i = 0; i < 3 ; i++){
-        
         for (j = 0; j < 3; j++){
           cellsContent.push(board[i][j])
         }
       }
       boardIsFull = cellsContent.every(cell => cell === "X" || cell === "O");
-      console.log(cellsContent)
+      verifyLine()
       if(boardIsFull === true){
         stopScreenDisplay.style.display = 'flex'
         winner.innerText = `DRAW`
